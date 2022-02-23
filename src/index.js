@@ -38,7 +38,31 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let str = ''
+    let pair = ''
+    let morse = ''
+    let result = ''
+    for (let i = 0; i < expr.length; i+= 10) {
+      str = expr.slice(i, i + 10)
+      if (str === "**********") {
+        result+= ' '
+      }
+      for (let j = 0; j < str.length; j+= 2) {
+        pair = str.slice(j, j + 2)
+        if (pair === '10') {
+          morse+= '.'
+        }
+        else if (pair === '11') {
+          morse+= '-'
+        }
+      }
+      for (let key in MORSE_TABLE) {
+        if (morse === key) {
+             result+= MORSE_TABLE[key]
+             morse = ''   
+        }
+      }
+    } return result
 }
 
 module.exports = {
